@@ -47,8 +47,6 @@ class Window {
             text(date, _x, _y);
             String time = "TIME: " + String.valueOf(h) + ":" + String.valueOf(min) + ":" + String.valueOf(s);
             text(time, _x, _y + 2 * pd);
-            String info = "INFO: " + settings.titles[0] + "    " + days[int(settings.titles[1])];
-            text(info, _x, _y + 4 * pd);
             if (settings.initialTime != 0)
                 duration = (settings.initialTime != 0) ? duration + minute + ":" + sec : duration + "NOT STARTED";
             text(duration, _x, _y + 6 * pd);

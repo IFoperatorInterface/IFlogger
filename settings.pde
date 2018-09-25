@@ -2,7 +2,6 @@ Window[] windows;
 RadioButton rType, rSession;
 
 class SETTING {
-    private String[] titles = new String[3];
     private boolean isCompleted = false;
     private int mode = 0;
     private int initialTime;
@@ -39,7 +38,6 @@ class SETTING {
         int min = minute();
         int sec = second();
        
-        titles[2] = String.valueOf(m) + "." + String.valueOf(d) + "." + String.valueOf(y) + "_" + String.valueOf(h) + "." + String.valueOf(min) + "." + String.valueOf(sec);
         controlP5 = new ControlP5(sketch);
         controlP5_setup = new ControlP5(sketch);
         controlP5.setAutoDraw(false);
