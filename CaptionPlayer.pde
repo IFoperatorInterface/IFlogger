@@ -1,9 +1,8 @@
 class CaptionPlayer {
   Caption[] captions;
   List<Caption> displayingCaptions;
-  final int DISPLAYING_TIME = int(FRAMERATE * 2);
-  final int TIME_PADDING = int(FRAMERATE * 5);
-  final int startTime;
+  final int DISPLAYING_TIME = 2000;
+  final int TIME_PADDING = 5000;
   final Date startRealTime;
   final int duration;
   int targetWindow;
@@ -16,12 +15,10 @@ class CaptionPlayer {
     this.captions = new Caption[lines.length - 1];
     for (int i=0; i<captions.length; i++)
       captions[i] = new Caption(lines[i+1]);
-      
-    this.startTime = captions[0].time;
 
     this.startRealTime = captions[0].realTime;
 
-    this.duration = captions[captions.length-1].time - captions[0].time + TIME_PADDING;
+    this.duration = int(captions[captions.length-1].realTime.getTime() - captions[0].realTime.getTime()) + TIME_PADDING;
 
     this.displayingCaptions = new ArrayList<Caption>();
 
@@ -50,12 +47,12 @@ class CaptionPlayer {
 
 
   void update() {
-    int currentTime = playController.getTime() + startTime;
+    long currentTime = playController.getTime() + startRealTime.getTime();
 
     while(!displayingCaptions.isEmpty()) {
       Caption c = displayingCaptions.get(0);
 
-      if (c.time <= currentTime - DISPLAYING_TIME)
+      if (c.realTime.getTime() <= currentTime - DISPLAYING_TIME)
         displayingCaptions.remove(0);
       else
         break;
@@ -64,7 +61,7 @@ class CaptionPlayer {
     for (int i=nextCaptionIdx; i<captions.length; i++) {
       Caption c = captions[i];
 
-      if (c.time <= currentTime) {
+      if (c.realTime.getTime() <= currentTime) {
         displayingCaptions.add(c);
         nextCaptionIdx = i+1;
       }
@@ -77,16 +74,16 @@ class CaptionPlayer {
   void jump(int time) {
     time = constrain(time, 0, duration);
 
-    int currentTime = time + startTime;
+    long currentTime = time + startRealTime.getTime();
 
     displayingCaptions.clear();
     nextCaptionIdx = 0;
     for (int i=0; i<captions.length; i++) {
       Caption c = captions[i];
-      if (c.time <= currentTime - DISPLAYING_TIME) {
+      if (c.realTime.getTime() <= currentTime - DISPLAYING_TIME) {
         nextCaptionIdx = i+1;
       }
-      else if ((c.time > currentTime - DISPLAYING_TIME) && (c.time <= currentTime)) {
+      else if ((c.realTime.getTime() > currentTime - DISPLAYING_TIME) && (c.realTime.getTime() <= currentTime)) {
         displayingCaptions.add(c);
         nextCaptionIdx = i+1;
       }
@@ -100,13 +97,12 @@ class CaptionPlayer {
 
 
   public Date getRealTime() {
-    return new Date(startRealTime.getTime() + int(playController.getTime() * 1000 / FRAMERATE));
+    return new Date(startRealTime.getTime() + int(playController.getTime()));
   }
 }
 
 
 class Caption {
-  int time;
   Date realTime;
   String subject;
   String content;
@@ -122,10 +118,6 @@ class Caption {
       realTime = sdf.parse(timeString);
     }
     catch (ParseException e) {}
-    String[] timeWords = timeString.split(":");
-    time = int(Integer.parseInt(timeWords[0]) * FRAMERATE * 60 * 60
-               + Integer.parseInt(timeWords[1]) * FRAMERATE * 60
-               + Float.parseFloat(timeWords[2]) * FRAMERATE);
     
     this.subject = s.substring(commaIdx+1, commaIdx2);
     this.content = s;

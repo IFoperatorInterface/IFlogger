@@ -49,20 +49,20 @@ class VideoController {
         pushStyle();
         textSize(11);
         float time = view.time();
-        String text = String.format("%02d:%05.2f (+%.2f)", int(time) / 60, time, syncValue / FRAMERATE);
+        String text = String.format("%02d:%05.2f (+%.2f)", int(time) / 60, time, syncValue / 1000.0);
         text(text, x, y + (int) h + (playController.sliderW + settings.PD) * 2);
         popStyle();
 
         if ((frameCount % UPDATE_RATE == 0) && (reservedJump != NONE)) {
             view.play();
-            view.jump((reservedJump + syncValue) / FRAMERATE);
+            view.jump((reservedJump + syncValue) / 1000.0);
             view.pause();
             reservedJump = NONE;
         }
 
         if ((frameCount % UPDATE_RATE == 0) && (reservedSync != NONE)) {
             view.play();
-            view.jump(view.time() + (reservedSync - this.syncValue) / FRAMERATE);
+            view.jump(view.time() + (reservedSync - this.syncValue) / 1000.0);
             for (int i = 0; i < 100; i++) {
                 delay(3);
                 if (view.available()) {
@@ -105,6 +105,6 @@ class VideoController {
 
 
     public int getDuration() {
-        return int(view.duration() * FRAMERATE);
+        return int(view.duration() * 1000);
     }
 }

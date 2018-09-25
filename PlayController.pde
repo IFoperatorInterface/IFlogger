@@ -62,7 +62,7 @@
        .setBroadcast(false)
        .setPosition(x[0], y[0])
        .setSize(int(windows[1].size.x), sliderW)
-       .setRange(0, 120)
+       .setRange(0, 120000)
        .setColorForeground(color(255, 180))
        .setColorBackground(color(255, 80))
        .setLabelVisible(false)
@@ -73,7 +73,7 @@
        .setBroadcast(false)
        .setPosition(x[1], y[1])
        .setSize(int(windows[5].size.x), sliderW)
-       .setRange(0, 120)
+       .setRange(0, 120000)
        .setColorForeground(color(255, 180))
        .setColorBackground(color(255, 80))
        .setLabelVisible(false)
@@ -84,7 +84,7 @@
        .setBroadcast(false)
        .setPosition(x[0], y[2])
        .setSize(int(windows[1].size.x), sliderW)
-       .setRange(-120, 120)
+       .setRange(-4000, 4000)
        .setColorForeground(color(255, 180))
        .setColorBackground(color(255, 80))
        .setLabelVisible(false)
@@ -95,7 +95,7 @@
        .setBroadcast(false)
        .setPosition(x[1], y[3])
        .setSize(int(windows[5].size.x), sliderW)
-       .setRange(-120, 120)
+       .setRange(-4000, 4000)
        .setColorForeground(color(255, 180))
        .setColorBackground(color(255, 80))
        .setLabelVisible(false)
@@ -138,7 +138,7 @@
      if (isPlaying) {
        timeSlider
          .setBroadcast(false)
-         .setValue((millis() - playStartTime) / 1000.0 * FRAMERATE)
+         .setValue((millis() - playStartTime))
          .setBroadcast(true);
 
        playAnnotation[0].draw(sketch);
@@ -148,7 +148,7 @@
 
      pushStyle();
      textSize(11);
-     float time = timeSlider.getValue() / FRAMERATE;
+     float time = timeSlider.getValue() / 1000.0;
      SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
      String realTime = sdf.format(captionPlayer1.getRealTime());
      String text = String.format("%02d:%05.2f\n%s", int(time) / 60, time % 60, realTime);
@@ -168,7 +168,7 @@
      if (isPlaying) {
        videoController1.play();
        videoController2.play();
-       playStartTime = millis() - int(timeSlider.getValue() / FRAMERATE * 1000.0);
+       playStartTime = millis() - int(timeSlider.getValue());
      } else {
        videoController1.pause();
        videoController2.pause();
@@ -213,7 +213,7 @@
    public void syncSlider(int bigValue, int theValue, VideoController targetVideoController) {
      playToggle.setValue(false);
 
-     targetVideoController.sync(int(bigValue * FRAMERATE) + theValue);
+     targetVideoController.sync(int(bigValue) + theValue);
    }
 
    public void volume1(float theValue) {
