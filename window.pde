@@ -16,42 +16,6 @@ class Window {
     }
 
     void display() {
-        if (indx == 0) {
-            pushStyle();
-
-            int textArea = 200;
-            int pd = windows[3].PD;
-            float _x = windows[3].xy.x + windows[3].size.x - textArea;
-            float _y = windows[3].xy.y + pd;
-
-            int d = day();
-            int m = month();
-            int y = year();
-            int h = hour();
-            int min = minute();
-            int s = second();
-
-            String[] days = {
-                "MON",
-                "TUE",
-                "WED",
-                "THU",
-                "FRI"
-            };
-
-            String sec = "" + ((millis() - settings.initialTime) / 1000) % 60;
-            String minute = "" + ((millis() - settings.initialTime) / (1000 * 60)) % 60;
-            String duration = "DURATION: ";
-
-            String date = "DATE: " + String.valueOf(m) + ". " + String.valueOf(d) + ". " + String.valueOf(y);
-            text(date, _x, _y);
-            String time = "TIME: " + String.valueOf(h) + ":" + String.valueOf(min) + ":" + String.valueOf(s);
-            text(time, _x, _y + 2 * pd);
-            if (settings.initialTime != 0)
-                duration = (settings.initialTime != 0) ? duration + minute + ":" + sec : duration + "NOT STARTED";
-            text(duration, _x, _y + 6 * pd);
-            popStyle();
-        }
         // stroke(80);
         // noFill();
         // rect(xy.x, xy.y, size.x, size.y);
