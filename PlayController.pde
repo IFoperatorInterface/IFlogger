@@ -45,13 +45,6 @@
        .plugTo(this)
        .setBroadcast(true);
 
-     int btSize = (int) windows[3].size.y - windows[2].PD * 2;
-     int _x = (int) windows[3].xy.x + btSize + windows[2].PD * 2;
-     int _y = (int) windows[3].xy.y + windows[2].PD;
-     controlP5.addToggle("record")
-       .setPosition(_x, _y)
-       .setSize(btSize, btSize);
-
      int movieSize = 398;
      int PD = 8;
      float[] x = {
