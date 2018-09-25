@@ -37,7 +37,7 @@ class CaptionPlayer {
     float x = windows[targetWindow].xy.x + windows[targetWindow].PD;
     float y = windows[targetWindow].xy.y + windows[targetWindow].PD;
     for (Caption c : displayingCaptions) {
-      if (!c.subject.equals(targetSubject))
+      if (!c.isFromSubject(targetSubject))
         continue;
 
       c.display(x, y);
@@ -130,5 +130,11 @@ class Caption {
     textSize(captionFontSize);
     text(content, x, y);
     popStyle();
+  }
+
+
+  public boolean isFromSubject(String targetSubject) {
+    String[] words = this.subject.split(" ");
+    return words[0].equals(targetSubject);
   }
 }
