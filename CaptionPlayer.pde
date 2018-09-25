@@ -4,6 +4,7 @@ class CaptionPlayer {
   final int DISPLAYING_TIME = int(FRAMERATE * 2);
   final int TIME_PADDING = int(FRAMERATE * 5);
   final int startTime;
+  final Date startRealTime;
   final int duration;
   int targetWindow;
   String targetSubject;
@@ -17,6 +18,8 @@ class CaptionPlayer {
       captions[i] = new Caption(lines[i+1]);
       
     this.startTime = captions[0].time;
+
+    this.startRealTime = captions[0].realTime;
 
     this.duration = captions[captions.length-1].time - captions[0].time + TIME_PADDING;
 
@@ -94,11 +97,17 @@ class CaptionPlayer {
   int getDuration() {
     return duration;
   }
+
+
+  public Date getRealTime() {
+    return new Date(startRealTime.getTime() + int(playController.getTime() * 1000 / FRAMERATE));
+  }
 }
 
 
 class Caption {
   int time;
+  Date realTime;
   String subject;
   String content;
   private final int captionFontSize = 9;
@@ -107,14 +116,19 @@ class Caption {
     int commaIdx = s.indexOf(",");
     int commaIdx2 = s.indexOf(",", commaIdx+1);
 
-    String timeString = s.substring(0, commaIdx);
+    String timeString = s.substring(0, commaIdx)+"0";
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+    try {
+      realTime = sdf.parse(timeString);
+    }
+    catch (ParseException e) {}
     String[] timeWords = timeString.split(":");
     time = int(Integer.parseInt(timeWords[0]) * FRAMERATE * 60 * 60
                + Integer.parseInt(timeWords[1]) * FRAMERATE * 60
                + Float.parseFloat(timeWords[2]) * FRAMERATE);
     
     this.subject = s.substring(commaIdx+1, commaIdx2);
-    this.content = s.substring(commaIdx2+1, s.length());
+    this.content = s;
   }
 
 

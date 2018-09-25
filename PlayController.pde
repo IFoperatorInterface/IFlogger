@@ -149,7 +149,9 @@
      pushStyle();
      textSize(11);
      float time = timeSlider.getValue() / FRAMERATE;
-     String text = String.format("%02d:%05.2f", int(time) / 60, time % 60);
+     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+     String realTime = sdf.format(captionPlayer1.getRealTime());
+     String text = String.format("%02d:%05.2f\n%s", int(time) / 60, time % 60, realTime);
      text(text, windows[2].xy.x, windows[2].xy.y + sliderW * 2.5 + 8);
      popStyle();
    }
