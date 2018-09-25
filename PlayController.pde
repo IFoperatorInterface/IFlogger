@@ -65,8 +65,7 @@
        videoController2.y + videoController2.h + (PD + sliderW)
      };
 
-     if (SHOW_OPERATOR)
-       this.syncBigSlider1 = controlP5.addSlider("syncBigSlider1")
+     this.syncBigSlider1 = controlP5.addSlider("syncBigSlider1")
        .setBroadcast(false)
        .setPosition(x[0], y[0])
        .setSize(int(windows[1].size.x), sliderW)
@@ -88,8 +87,7 @@
        .plugTo(this)
        .setBroadcast(true);
 
-     if (SHOW_OPERATOR)
-       this.syncSlider1 = controlP5.addSlider("syncSlider1")
+     this.syncSlider1 = controlP5.addSlider("syncSlider1")
        .setBroadcast(false)
        .setPosition(x[0], y[2])
        .setSize(int(windows[1].size.x), sliderW)

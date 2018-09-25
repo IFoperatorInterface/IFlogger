@@ -40,10 +40,6 @@ class VideoController {
         view.volume(VOLUME_INIT);
     }
     void display() {
-
-        if (!SHOW_OPERATOR && targetSubject == "Operator")
-            return;
-
         if (view.available()) {
             view.read();
         }
@@ -84,29 +80,21 @@ class VideoController {
     }
 
     void play() {
-        if (!SHOW_OPERATOR && targetSubject == "Operator")
-            return;
         view.play();
     }
 
 
     void pause() {
-        if (!SHOW_OPERATOR && targetSubject == "Operator")
-            return;
         view.pause();
     }
 
 
     void jump(int frame) {
-        if (!SHOW_OPERATOR && targetSubject == "Operator")
-            return;
         reservedJump = frame;
     }
 
 
     void sync(int syncValue) {
-        if (!SHOW_OPERATOR && targetSubject == "Operator")
-            return;
         reservedSync = syncValue;
     }
 

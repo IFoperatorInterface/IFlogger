@@ -1,6 +1,5 @@
 Range navi;
 class Window {
-    private Indicator[] indicators = new Indicator[2];
     PVector size, xy, volumeXY;
     int indx;
     private final Integer PD = 8;
@@ -14,8 +13,6 @@ class Window {
         this.indx = indx;
         volumeXY = xy;
         size = new PVector(w, h);
-        for (int i = 0; i < indicators.length; i++)
-            indicators[i] = new Indicator(indx, i);
     }
 
     void display() {

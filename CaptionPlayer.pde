@@ -31,9 +31,6 @@ class CaptionPlayer {
 
 
   void draw() {
-    if (!SHOW_OPERATOR && targetSubject=="Operator")
-      return;
-    
     if (playController.isPlaying)
       update();
 
@@ -50,9 +47,6 @@ class CaptionPlayer {
 
 
   void update() {
-    if (!SHOW_OPERATOR && targetSubject=="Operator")
-      return;
-
     int currentTime = playController.getTime() + startTime;
 
     while(!displayingCaptions.isEmpty()) {
@@ -78,9 +72,6 @@ class CaptionPlayer {
 
 
   void jump(int time) {
-    if (!SHOW_OPERATOR && targetSubject=="Operator")
-      return;
-
     time = constrain(time, 0, duration);
 
     int currentTime = time + startTime;
