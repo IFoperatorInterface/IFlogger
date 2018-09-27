@@ -9,14 +9,14 @@ class SETTING {
     private final int NUM_DIVISION = 22;
     private final int PD = 8;
     private final int[] NUM_WIN_SIZE = {
-        4,
-        13,
-        3,
+        6,
+        9,
         2,
-        4,
-        13,
-        3,
-        2
+        5,
+        6,
+        9,
+        2,
+        5
     };
     private final int[] NUM_WINMODE = {
         0,
