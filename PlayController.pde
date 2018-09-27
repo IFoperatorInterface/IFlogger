@@ -9,12 +9,6 @@
    private Slider syncSlider1, syncSlider2;
    private Slider volume1, volume2;
 
-   private final Textlabel[] playAnnotation = new Textlabel[2];
-   private final String[] playText = {
-     "PAUSE: Press the [SPACEBAR] to stop playing.",
-     "PLAY: Press the [SPACEBAR] to start playing."
-   };
-
    private final int sliderW = 10;
 
 
@@ -101,8 +95,6 @@
        .setLabelVisible(false)
        .plugTo(this)
        .setBroadcast(true);
-     for (int i = 0; i < playAnnotation.length; i++)
-       playAnnotation[i] = new Textlabel(controlP5, playText[i], int(windows[3].xy.x + (windows[3].size.y + windows[3].PD) * 2), int(windows[3].xy.y + windows[3].PD * 4));
 
      this.volume1 = controlP5.addSlider("volume1")
        .setPosition(videoController1.x, videoController1.y)
@@ -140,10 +132,6 @@
          .setBroadcast(false)
          .setValue((millis() - playStartTime))
          .setBroadcast(true);
-
-       playAnnotation[0].draw(sketch);
-     } else {
-       playAnnotation[1].draw(sketch);
      }
 
      pushStyle();
