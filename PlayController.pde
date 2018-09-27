@@ -22,16 +22,16 @@
      this.playStartTime = 0;
 
      this.playToggle = controlP5.addToggle("playToggle")
-       .setPosition(windows[3].xy.x + windows[2].PD, windows[3].xy.y + windows[3].PD)
-       .setSize(int(windows[3].size.y - windows[2].PD * 2), int(windows[3].size.y - windows[3].PD * 2))
+       .setPosition(windows[2].xy.x, windows[2].xy.y)
+       .setSize(int(windows[2].size.y / 2), int(windows[2].size.y / 2))
        .setCaptionLabel("play/stop")
        //  .setLabelVisible(false)
        .plugTo(this);
 
      this.timeSlider = controlP5.addSlider("timeSlider")
        .setBroadcast(false)
-       .setPosition(windows[2].xy.x, windows[2].xy.y)
-       .setSize(width - windows[2].PD * 2, int(sliderW * 2.5))
+       .setPosition(windows[2].xy.x + windows[2].size.y / 2 + windows[2].PD, windows[2].xy.y)
+       .setSize(width - int(windows[2].size.y / 2) - windows[2].PD * 3, int(sliderW * 2.5))
        .setRange(0, duration)
        .setColorForeground(color(255, 180))
        .setColorBackground(color(255, 80))
@@ -140,7 +140,7 @@
      SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
      String realTime = sdf.format(captionPlayer1.getRealTime());
      String text = String.format("%02d:%05.2f\n%s", int(time) / 60, time % 60, realTime);
-     text(text, windows[2].xy.x, windows[2].xy.y + sliderW * 2.5 + 8);
+     text(text, windows[2].xy.x + windows[2].size.y / 2 + windows[2].PD, windows[2].xy.y + sliderW * 2.5 + 8);
      popStyle();
    }
 
