@@ -25,11 +25,11 @@ public void settings() {
 }
 void setup() {
     settings = new SETTING();
-    videoController1 = new VideoController("operator2.mp4", "Operator", 1);
-    videoController2 = new VideoController("visitor2.mp4", "Visitor", 5);
+    videoController1 = new VideoController("operator.mp4", "Operator", 1);
+    videoController2 = new VideoController("visitor.mp4", "Visitor", 5);
 
     captionPlayer1 = new CaptionPlayer("log.csv", "Operator", 0);
-    captionPlayer2 = new CaptionPlayer("log2.csv", "Visitor", 4);
+    captionPlayer2 = new CaptionPlayer("log.csv", "Visitor", 4);
     playController = new PlayController();
     frameRate(30);
     settings.isCompleted = true;
